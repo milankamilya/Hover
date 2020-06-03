@@ -78,6 +78,9 @@ public class HoverView: UIView {
     
     public var onPositionChange: ((HoverPosition) -> ())?
     
+    public var onlyFABButton: Bool = false
+    public var onFABButtonTapped: () -> Void = { }
+    
     // MARK: Private Properties
     private let anchors: [Anchor]
     private let configuration: HoverConfiguration
@@ -191,12 +194,19 @@ private extension HoverView {
 private extension HoverView {
     
     func onTouchInDim() {
+        if onlyFABButton {
+            return
+        }
         animateState(to: false)
     }
     
     @objc
     func onTapInButton() {
-        animateState(to: !isOpen)
+        if onlyFABButton {
+            onFABButtonTapped()
+        } else {
+            animateState(to: !isOpen)
+        }
     }
     
     @objc
