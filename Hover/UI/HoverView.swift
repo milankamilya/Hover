@@ -142,6 +142,10 @@ public extension HoverView {
         }
         return hitView
     }
+    
+    func updateBackgroundColor(color: UIColor) {
+        button.backgroundColor = color
+    }
 }
 
 // MARK: - Configuration
